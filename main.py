@@ -1,7 +1,8 @@
 import streamlit as st
-from utils.tabuleiro import board_editor_function
 from utils.maintexto import mhd_function
+from utils.tabuleiro import board_editor_function
 from utils.frases import phrase_bank_function
+from utils.export import generate_pdf, generate_csv
 
 st.set_page_config(page_title="Ensino de Ciência e Xadrez", layout="wide")
 
@@ -28,7 +29,7 @@ elif menu_option == "Banco de Frases":
     phrase_bank_function()
 elif menu_option == "Exportar Dados":
     st.title("Exportar Dados Consolidado")
-    st.markdown("### Dados do MHD")
+    st.markdown("### Dados do Modelo Hipotético-Dedutivo")
     st.write(st.session_state.mhd_data)
     st.markdown("### Configuração do Tabuleiro")
     st.write(st.session_state.board_data)
@@ -39,8 +40,6 @@ elif menu_option == "Exportar Dados":
 
     if st.button("Exportar"):
         if export_format == "PDF":
-            from utils.export import generate_pdf
             generate_pdf(st.session_state.mhd_data, st.session_state.board_data, st.session_state.phrases_selected)
         elif export_format == "CSV":
-            from utils.export import generate_csv
             generate_csv(st.session_state.mhd_data, st.session_state.board_data, st.session_state.phrases_selected)
