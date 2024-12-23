@@ -1,4 +1,5 @@
 from fpdf import FPDF
+import pandas as pd
 import streamlit as st
 
 def generate_pdf(mhd_data, board_data, phrases_selected):
@@ -50,12 +51,23 @@ def generate_pdf(mhd_data, board_data, phrases_selected):
 
     return pdf.output(dest="S").encode("latin1")
 
-# Função para integrar ao botão de download
-def setup_download_buttons(mhd_data, board_data, phrases_selected):
-    pdf_data = generate_pdf(mhd_data, board_data, phrases_selected)
-    st.download_button(
-        label="Baixar Relatório em PDF",
-        data=pdf_data,
-        file_name="relatorio_mhd.pdf",
-        mime="application/pdf"
-    )
+def generate_csv(mhd_data, board_data, phrases_selected):
+    rows = []
+
+    # Modelo Hipotético-Dedutivo
+    if mhd_data:
+        for key, value in mhd_data.items():
+            rows.append({"Categoria": "Modelo Hipotético-Dedutivo", "Descrição": f"{key}: {value}"})
+
+    # Tabuleiro
+    if board_data:
+        rows.append({"Categoria": "Configuração do Tabuleiro", "Descrição": board_data})
+
+    # Frases Selecionadas
+    if phrases_selected:
+        for phrase in phrases_selected:
+            rows.append({"Categoria": "Frases Selecionadas", "Descrição": phrase})
+
+    # Gerar CSV
+    df = pd.DataFrame(rows)
+    return df.to_csv(index=False).encode("utf-8")
