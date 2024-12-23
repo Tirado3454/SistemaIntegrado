@@ -43,15 +43,7 @@ def mhd_function():
         return pdf.output(dest="S").encode("latin1")
 
     # Títulos e introdução
-    st.markdown(
-        """
-        <h1>
-            <img src='data:image/png;base64,<insira_o_base64_gerado_da_logo_aqui>' style='height:50px; margin-right:10px;'> Modelo Hipotético-Dedutivo no Xadrez
-        </h1>
-        """,
-        unsafe_allow_html=True
-    )
-    st.header("Etapas do Modelo Hipotético-Dedutivo")
+    st.header("Modelo Hipotético-Dedutivo no Xadrez")
 
     # Seção de seleção de tópicos
     st.subheader("Tópicos do MHD")
@@ -100,7 +92,7 @@ def mhd_function():
     else:
         st.info("Nenhuma etapa adicionada ainda.")
 
-    # Botão para exportar
+    # Exportação das etapas
     st.subheader("Exportar Etapas")
     col1, col2 = st.columns(2)
 
