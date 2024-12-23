@@ -1,3 +1,9 @@
+if menu_option == "Modelo Hipotético-Dedutivo":
+    mhd_function()
+elif menu_option == "Editor de Tabuleiro":
+    board_editor_function()
+elif menu_option == "Banco de Frases":
+    phrase_bank_function()
 elif menu_option == "Exportar Dados":
     st.title("Exportar Dados Consolidado")
     st.markdown("### Dados do Modelo Hipotético-Dedutivo")
