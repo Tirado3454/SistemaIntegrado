@@ -29,39 +29,53 @@ elif menu_option == "Editor de Tabuleiro":
 elif menu_option == "Banco de Frases":
     phrase_bank_function()
 elif menu_option == "Exportar Dados":
-    st.title("Exportar Dados Consolidado")
+    st.title("Exportar Dados Consolidados")
+    
+    # Exibir dados disponíveis
     st.markdown("### Dados do Modelo Hipotético-Dedutivo")
     if st.session_state.get("mhd_data"):
-        st.write(st.session_state.mhd_data)
+        st.write(st.session_state["mhd_data"])
     else:
         st.warning("Nenhum dado do Modelo Hipotético-Dedutivo disponível.")
 
     st.markdown("### Configuração do Tabuleiro")
     if st.session_state.get("board_data"):
-        st.write(st.session_state.board_data)
+        st.write(st.session_state["board_data"])
     else:
         st.warning("Nenhuma configuração de tabuleiro disponível.")
 
     st.markdown("### Frases Selecionadas")
     if st.session_state.get("phrases_selected"):
-        st.write(st.session_state.phrases_selected)
+        st.write(st.session_state["phrases_selected"])
     else:
         st.warning("Nenhuma frase selecionada.")
 
+    # Escolher formato de exportação
     export_format = st.radio("Escolha o formato de exportação:", ["PDF", "CSV"])
 
+    # Botão de exportação
     if st.button("Exportar"):
         if export_format == "PDF":
-            generate_pdf(
+            pdf_data = generate_pdf(
                 st.session_state.get("mhd_data", {}),
                 st.session_state.get("board_data", ""),
                 st.session_state.get("phrases_selected", [])
             )
-            st.success("Exportação para PDF concluída com sucesso!")
+            st.download_button(
+                label="Baixar PDF",
+                data=pdf_data,
+                file_name="dados_consolidados.pdf",
+                mime="application/pdf"
+            )
         elif export_format == "CSV":
-            generate_csv(
+            csv_data = generate_csv(
                 st.session_state.get("mhd_data", {}),
                 st.session_state.get("board_data", ""),
                 st.session_state.get("phrases_selected", [])
             )
-            st.success("Exportação para CSV concluída com sucesso!")
+            st.download_button(
+                label="Baixar CSV",
+                data=csv_data,
+                file_name="dados_consolidados.csv",
+                mime="text/csv"
+            )
