@@ -11,26 +11,42 @@ def generate_pdf(mhd_data, board_data, phrases_selected):
     pdf.ln(10)
 
     # Dados do MHD
-    pdf.set_font("Arial", style="B", size=12)
-    pdf.cell(200, 10, txt="Modelo Hipotético-Dedutivo", ln=True)
-    pdf.set_font("Arial", size=12)
-    for key, value in mhd_data.items():
-        pdf.cell(0, 10, f"{key}: {value}", ln=True)
+    if mhd_data:
+        pdf.set_font("Arial", style="B", size=12)
+        pdf.cell(200, 10, txt="Modelo Hipotético-Dedutivo", ln=True)
+        pdf.set_font("Arial", size=12)
+        for key, value in mhd_data.items():
+            pdf.cell(0, 10, f"{key}: {value}", ln=True)
+        pdf.ln(10)
+    else:
+        pdf.set_font("Arial", size=12)
+        pdf.cell(200, 10, txt="Sem dados do Modelo Hipotético-Dedutivo.", ln=True)
+        pdf.ln(10)
 
-    pdf.ln(10)
     # Dados do Tabuleiro
-    pdf.set_font("Arial", style="B", size=12)
-    pdf.cell(200, 10, txt="Configuração do Tabuleiro", ln=True)
-    pdf.set_font("Arial", size=12)
-    pdf.multi_cell(0, 10, board_data)
+    if board_data:
+        pdf.set_font("Arial", style="B", size=12)
+        pdf.cell(200, 10, txt="Configuração do Tabuleiro", ln=True)
+        pdf.set_font("Arial", size=12)
+        pdf.multi_cell(0, 10, board_data)
+        pdf.ln(10)
+    else:
+        pdf.set_font("Arial", size=12)
+        pdf.cell(200, 10, txt="Sem configuração de tabuleiro.", ln=True)
+        pdf.ln(10)
 
-    pdf.ln(10)
     # Frases Selecionadas
-    pdf.set_font("Arial", style="B", size=12)
-    pdf.cell(200, 10, txt="Frases Selecionadas", ln=True)
-    pdf.set_font("Arial", size=12)
-    for phrase in phrases_selected:
-        pdf.multi_cell(0, 10, phrase)
+    if phrases_selected:
+        pdf.set_font("Arial", style="B", size=12)
+        pdf.cell(200, 10, txt="Frases Selecionadas", ln=True)
+        pdf.set_font("Arial", size=12)
+        for phrase in phrases_selected:
+            pdf.multi_cell(0, 10, phrase)
+        pdf.ln(10)
+    else:
+        pdf.set_font("Arial", size=12)
+        pdf.cell(200, 10, txt="Nenhuma frase selecionada.", ln=True)
+        pdf.ln(10)
 
     pdf_output = pdf.output(dest="S").encode("latin1")
     st.download_button(
@@ -41,10 +57,14 @@ def generate_pdf(mhd_data, board_data, phrases_selected):
     )
 
 def generate_csv(mhd_data, board_data, phrases_selected):
+    if not mhd_data and not board_data and not phrases_selected:
+        st.warning("Nenhum dado disponível para exportação.")
+        return
+
     data = {
-        "Modelo Hipotético-Dedutivo": [str(mhd_data)],
-        "Configuração do Tabuleiro": [board_data],
-        "Frases Selecionadas": [", ".join(phrases_selected)],
+        "Modelo Hipotético-Dedutivo": [str(mhd_data) if mhd_data else "Sem dados"],
+        "Configuração do Tabuleiro": [board_data if board_data else "Sem configuração"],
+        "Frases Selecionadas": [", ".join(phrases_selected) if phrases_selected else "Nenhuma frase selecionada"],
     }
     df = pd.DataFrame(data)
     csv_data = df.to_csv(index=False).encode("utf-8")
