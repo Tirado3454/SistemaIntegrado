@@ -6,7 +6,7 @@ def phrase_bank_function():
     # Banco de frases completo
     frases_por_titulo = {
         "Método Científico e a Evolução da Ciência": [
-            "O método científico é uma abordagem sistemática para entender o mundo natural.",
+        "O método científico é uma abordagem sistemática para entender o mundo natural.",
         "A ciência evolui com base em observações, hipóteses, experimentos e análises.",
         "Cada descoberta científica é construída sobre os ombros de conhecimentos prévios.",
         "O método científico promove a busca pela verdade com base em evidências.",
