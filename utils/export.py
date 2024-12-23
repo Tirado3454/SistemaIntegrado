@@ -1,4 +1,5 @@
 from fpdf import FPDF
+import pandas as pd
 import streamlit as st
 
 def generate_pdf(mhd_data, board_data, phrases_selected):
@@ -6,52 +7,65 @@ def generate_pdf(mhd_data, board_data, phrases_selected):
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
     pdf.set_font("Arial", size=12)
-    pdf.cell(200, 10, txt="Dados Consolidados - Ensino de CiÍncia e Xadrez", ln=True, align="C")
+
+    # Cabe√ßalho
+    pdf.cell(200, 10, txt="Dados Consolidados - Ensino de Ciencia e Xadrez", ln=True, align="C")
     pdf.ln(10)
 
-    # Dados do MHD
+    # Modelo Hipot√©tico-Dedutivo
     if mhd_data:
         pdf.set_font("Arial", style="B", size=12)
-        pdf.cell(200, 10, txt="Modelo HipotÈtico-Dedutivo", ln=True)
+        pdf.cell(200, 10, txt="Modelo Hipotetico-Dedutivo", ln=True)
         pdf.set_font("Arial", size=12)
         for key, value in mhd_data.items():
-            if key and value:  # Verificar se os dados n„o est„o vazios
+            if key and value:
                 pdf.multi_cell(0, 10, f"{key}: {value}")
         pdf.ln(5)
     else:
-        pdf.set_font("Arial", size=12)
-        pdf.cell(200, 10, txt="Sem dados do Modelo HipotÈtico-Dedutivo.", ln=True)
+        pdf.cell(200, 10, txt="Sem dados do Modelo Hipotetico-Dedutivo.", ln=True)
 
-    pdf.ln(5)  # Separador
-    # Dados do Tabuleiro
+    # Tabuleiro
     if board_data:
         pdf.set_font("Arial", style="B", size=12)
-        pdf.cell(200, 10, txt="ConfiguraÁ„o do Tabuleiro", ln=True)
+        pdf.cell(200, 10, txt="Configuracao do Tabuleiro", ln=True)
         pdf.set_font("Arial", size=12)
         pdf.multi_cell(0, 10, board_data)
         pdf.ln(5)
     else:
-        pdf.set_font("Arial", size=12)
-        pdf.cell(200, 10, txt="Sem configuraÁ„o de tabuleiro.", ln=True)
+        pdf.cell(200, 10, txt="Sem configuracao de tabuleiro.", ln=True)
 
-    pdf.ln(5)  # Separador
     # Frases Selecionadas
     if phrases_selected:
         pdf.set_font("Arial", style="B", size=12)
         pdf.cell(200, 10, txt="Frases Selecionadas", ln=True)
         pdf.set_font("Arial", size=12)
         for phrase in phrases_selected:
-            if phrase:  # Verificar se a frase n„o est· vazia
+            if phrase:
                 pdf.multi_cell(0, 10, phrase)
         pdf.ln(5)
     else:
-        pdf.set_font("Arial", size=12)
         pdf.cell(200, 10, txt="Nenhuma frase selecionada.", ln=True)
 
-    pdf_output = pdf.output(dest="S").encode("latin1")
-    st.download_button(
-        label="Baixar PDF",
-        data=pdf_output,
-        file_name="dados_consolidados.pdf",
-        mime="application/pdf",
-    )
+    return pdf.output(dest="S").encode("latin1")
+
+def generate_csv(mhd_data, board_data, phrases_selected):
+    # Consolidar dados em um DataFrame
+    rows = []
+
+    # Modelo Hipot√©tico-Dedutivo
+    if mhd_data:
+        for key, value in mhd_data.items():
+            rows.append({"Categoria": "Modelo Hipot√©tico-Dedutivo", "Descri√ß√£o": f"{key}: {value}"})
+
+    # Tabuleiro
+    if board_data:
+        rows.append({"Categoria": "Configura√ß√£o do Tabuleiro", "Descri√ß√£o": board_data})
+
+    # Frases Selecionadas
+    if phrases_selected:
+        for phrase in phrases_selected:
+            rows.append({"Categoria": "Frases Selecionadas", "Descri√ß√£o": phrase})
+
+    # Gerar CSV
+    df = pd.DataFrame(rows)
+    return df.to_csv(index=False).encode("utf-8")
