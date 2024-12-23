@@ -7,6 +7,14 @@ from utils.export import generate_pdf, generate_csv
 # Configuração inicial da página
 st.set_page_config(page_title="Ensino de Ciência e Xadrez", layout="wide")
 
+# Inicializar estados globais, se necessário
+if "mhd_data" not in st.session_state:
+    st.session_state["mhd_data"] = {}
+if "board_data" not in st.session_state:
+    st.session_state["board_data"] = ""
+if "phrases_selected" not in st.session_state:
+    st.session_state["phrases_selected"] = []
+
 # Definição do menu de navegação
 menu_option = st.sidebar.radio(
     "Escolha uma funcionalidade:",
@@ -49,9 +57,11 @@ elif menu_option == "Exportar Dados":
                 st.session_state.get("board_data", ""),
                 st.session_state.get("phrases_selected", [])
             )
+            st.success("Exportação para PDF concluída com sucesso!")
         elif export_format == "CSV":
             generate_csv(
                 st.session_state.get("mhd_data", {}),
                 st.session_state.get("board_data", ""),
                 st.session_state.get("phrases_selected", [])
             )
+            st.success("Exportação para CSV concluída com sucesso!")
