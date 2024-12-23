@@ -7,13 +7,39 @@ def phrase_bank_function():
     frases_por_titulo = {
         "Método Científico e a Evolução da Ciência": [
             "O método científico é uma abordagem sistemática para entender o mundo natural.",
-            "A ciência evolui com base em observações, hipóteses, experimentos e análises.",
-            # Insira todas as 30 frases para este tema
+        "A ciência evolui com base em observações, hipóteses, experimentos e análises.",
+        "Cada descoberta científica é construída sobre os ombros de conhecimentos prévios.",
+        "O método científico promove a busca pela verdade com base em evidências.",
+        "Hipóteses científicas devem ser testáveis e sujeitas a refutação.",
+        "A experimentação é o coração do método científico, permitindo a validação de hipóteses.",
+        "O método científico evoluiu ao longo da história, desde a filosofia grega até a ciência moderna.",
+        "Observações precisas são a base para formular questões científicas relevantes.",
+        "A ciência é um processo cumulativo que se adapta e se corrige ao longo do tempo.",
+        "Teorias científicas não são verdades absolutas, mas explicações baseadas em evidências robustas.",
+        "A ciência moderna foi moldada pela Revolução Científica nos séculos XVI e XVII.",
+        "Galileu Galilei é considerado um dos pioneiros na aplicação do método científico.",
+        "O avanço da tecnologia ampliou significativamente as fronteiras da ciência.",
+        "A repetibilidade é um princípio fundamental para validar experimentos científicos.",
+        "O método científico permite transformar curiosidade em conhecimento estruturado.",
+        "A ciência é impulsionada por perguntas, mas cresce a partir das respostas.",
+        "Grandes descobertas frequentemente surgem da observação de fenômenos inesperados.",
+        "A ciência é uma ferramenta poderosa para resolver problemas globais, como mudanças climáticas e pandemias.",
+        "A evolução da ciência depende da colaboração entre pesquisadores de diferentes áreas.",
+        "O método científico promove um pensamento crítico e cético, essencial para o progresso humano.",
+        "Cientistas devem estar dispostos a revisar suas ideias à luz de novas evidências.",
+        "A ética desempenha um papel fundamental na aplicação responsável do conhecimento científico.",
+        "A ciência moderna se tornou interdisciplinar, unindo biologia, química, física e mais.",
+        "A evolução da ciência é marcada por revoluções paradigmáticas, como descrito por Thomas Kuhn.",
+        "A comunicação científica é vital para a disseminação e aplicação do conhecimento.",
+        "Grandes invenções, como o telescópio e o microscópio, revolucionaram o método científico.",
+        "O método científico é aplicável em diversas áreas, desde ciências naturais até ciências sociais.",
+        "Einstein destacou que a imaginação é tão importante quanto o conhecimento na ciência.",
+        "A ciência continua a evoluir, questionando as fronteiras do desconhecido.",
+        "O método científico é um farol para a humanidade, guiando-nos em direção à compreensão e ao progresso."
         ],
         "Sem Método Científico e Fatores Insólitos": [
             "Sem o método científico, nossas explicações para fenômenos naturais seriam baseadas em mitos e superstições.",
-            "A humanidade viveria à mercê de crenças infundadas e dogmas inquestionáveis.",
-            # Insira todas as 30 frases para este tema
+            "A humanidade viveria à mercê de crenças infundadas e dogmas inquestionáveis."            
         ],
         "Como o Cientista Deve Proceder": 
 [
