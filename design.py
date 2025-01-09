@@ -1,7 +1,7 @@
 import streamlit as st
 
 def aplicar_estilo():
-    # CSS Global para o aplicativo
+    # CSS para o aplicativo
     st.markdown(
         """
         <style>
@@ -27,6 +27,11 @@ def aplicar_estilo():
         }
         div.stButton > button:hover {
             background-color: #45a049;
+        }
+        .stSidebar {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
         }
         </style>
         """,
