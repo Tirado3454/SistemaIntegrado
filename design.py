@@ -1,7 +1,7 @@
 import streamlit as st
 
 def aplicar_estilo():
-    # CSS para personalizar o estilo global
+    # CSS Global para o aplicativo
     st.markdown(
         """
         <style>
