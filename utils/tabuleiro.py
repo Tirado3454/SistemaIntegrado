@@ -1,6 +1,7 @@
 import streamlit as st
 import chess
 import chess.svg
+import base64
 
 def board_editor_function():
     # Inicialização do tabuleiro no estado global
@@ -11,7 +12,7 @@ def board_editor_function():
 
     # Função para renderizar o tabuleiro com estilo customizado
     def render_tabuleiro_customizado(board):
-        return chess.svg.board(
+        svg = chess.svg.board(
             board=board, 
             size=320,  # Tamanho do tabuleiro
             style=""" 
@@ -19,6 +20,7 @@ def board_editor_function():
                 .square.dark { fill: #8FBC8F; }  /* Casas escuras em verde */
             """
         )
+        return svg
 
     # Configuração do tabuleiro com FEN
     st.subheader("Configuração do Tabuleiro")
@@ -38,10 +40,12 @@ def board_editor_function():
 
     # Visualizar tabuleiro configurado - centralizado
     st.subheader("Tabuleiro Atual")
+    svg_data = render_tabuleiro_customizado(st.session_state.current_board)
+    b64_svg = base64.b64encode(svg_data.encode('utf-8')).decode('utf-8')
     st.markdown(
         f"""
         <div style="display: flex; justify-content: center;">
-            <img src="data:image/svg+xml;base64,{st.image(render_tabuleiro_customizado(st.session_state.current_board), use_column_width=False)}" />
+            <img src="data:image/svg+xml;base64,{b64_svg}" style="width: 320px;" />
         </div>
         """,
         unsafe_allow_html=True
@@ -50,3 +54,4 @@ def board_editor_function():
     # Mostrar a FEN atual
     st.subheader("Notação FEN Atual")
     st.code(st.session_state.board_data, language="text")
+
