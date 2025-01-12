@@ -36,6 +36,17 @@ def board_editor_function():
         except ValueError:
             st.error("Notação FEN inválida. Por favor, insira uma notação correta.")
 
+    # Visualizar tabuleiro configurado - centralizado
+    st.subheader("Tabuleiro Atual")
+    st.markdown(
+        f"""
+        <div style="display: flex; justify-content: center;">
+            <img src="data:image/svg+xml;base64,{st.image(render_tabuleiro_customizado(st.session_state.current_board), use_column_width=False)}" />
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
     # Visualizar tabuleiro configurado
     st.subheader("Tabuleiro Atual")
     st.image(render_tabuleiro_customizado(st.session_state.current_board),)
