@@ -47,10 +47,6 @@ def board_editor_function():
         unsafe_allow_html=True
     )
 
-    # Visualizar tabuleiro configurado
-    st.subheader("Tabuleiro Atual")
-    st.image(render_tabuleiro_customizado(st.session_state.current_board),)
-
     # Mostrar a FEN atual
     st.subheader("Notação FEN Atual")
     st.code(st.session_state.board_data, language="text")
