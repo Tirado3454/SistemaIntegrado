@@ -38,7 +38,7 @@ def board_editor_function():
 
     # Visualizar tabuleiro configurado
     st.subheader("Tabuleiro Atual")
-    st.image(render_tabuleiro_customizado(st.session_state.current_board), use_container_width=True)
+    st.image(render_tabuleiro_customizado(st.session_state.current_board),)
 
     # Mostrar a FEN atual
     st.subheader("Notação FEN Atual")
